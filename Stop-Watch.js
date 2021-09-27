@@ -13,12 +13,11 @@ const reducer = (state, action) => {
 export default function App() {
   const [time, setTime] = useState(0);
   const [list, dispatch] = useReducer(reducer, []);
-  var timer;
   const startTimer = () => {
     if (this.timer === undefined) {
       this.timer = setInterval(() => {
         setTime((time) => time + 1);
-      }, 1000);
+      }, 100);
     } else {
       clearInterval(this.timer);
       this.timer = undefined;
@@ -32,7 +31,7 @@ export default function App() {
   };
   return (
     <div className="App">
-      {time}
+      {time % 10 === 0 ? <div>{time / 10}.0</div> : <div>{time / 10}</div>}
       <br />
       <button onClick={startTimer}>Start/Stop</button>
       <button onClick={resetTimer}>Reset</button>
@@ -41,7 +40,7 @@ export default function App() {
       </button>
       <br />
       {list.map((item, index) => {
-        return <div key={`${index}-${item}`}>{item}</div>;
+        return <div key={`${index}-${item}`}>{item / 10}</div>;
       })}
     </div>
   );
